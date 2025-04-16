@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Task Organiser</title>
     <link rel="stylesheet" href="./styles/output.css" />
+    <script src="https://kit.fontawesome.com/240b0bf0d2.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body class="bg-yellow-900 text-white font-primary min-h-screen">
@@ -13,120 +15,138 @@
     <!-- Header -->
     <header class="bg-gray-900 px-10 py-4 flex justify-between items-center">
         <h1 class="text-xl font-bold">Task Organiser</h1>
-        <button class="bg-blue-600 px-4 py-2 rounded hover:bg-blue-500 text-sm cursor-pointer" onclick="showAddTaskModal()">Add Task</button>
+
+        <div class="bg-gray-600 rounded-full px-3 flex items-center">
+           <input id="searchTask" type="text" class=" bg-none py-4 outline-none border-none" placeholder="Enter Task ID To Search...">
+           <span><i class="fa-solid fa-magnifying-glass text-2xl cursor-pointer"></i></span>
+        </div>
+
+        <button class="text-lg bg-blue-600 px-4 py-2 rounded hover:bg-blue-500 cursor-pointer"
+            onclick="showAddTaskModal()">
+            Add Task
+        </button>
     </header>
 
     <!-- Main Columns -->
-    <main class="flex gap-4 max-w-[var(--standard-width)] mx-auto p-4">
+    <main class="flex items-start gap-4 max-w-[var(--standard-width)] mx-auto p-4">
 
-            <!-- Backlog -->
-            <section class="flex-1 bg-gray-800 rounded-lg p-4">
-                <h2 id="" class="text-lg font-semibold mb-2">Backlog</h2>
-                    <div id="backlogTasks" class="">
+        <!-- Backlog -->
+        <section class="flex-1 bg-gray-800 rounded-lg p-4" >
+            <h2 id="" class="text-lg font-semibold mb-2">Backlog</h2>
+            <div id="backlogTasks" class="" ondrop="dropEventHandler(event)" ondragover="dragoverHandler(event)">
 
-                    </div>
-            </section>
+            </div>
+            <div class="flex relative items-center mt-2 ml-2 gap-2 cursor-pointer hover:text-gray-300" onclick="showAddTaskModal()">
+                <i class="fa-solid fa-plus"></i>
+                <span class="">Add a card</span>
+            </div>
+        </section>
 
-            <!-- In Progress -->
-            <section class="flex-1 bg-gray-800 rounded-lg p-4">
-                <h2 class="text-lg font-semibold mb-2">In Progress</h2>
-                    <div id="inProgreTasks" class="">
+        <!-- In Progress -->
+        <section class="flex-1 bg-gray-800 rounded-lg p-4">
+            <h2 id="" class="text-lg font-semibold mb-2">In Progress</h2>
+            <div id="inProgressTasks" class="">
 
-                    </div>
-            </section>
+            </div>
+            <div class="flex relative items-center mt-2 ml-2 gap-2 cursor-pointer hover:text-gray-300" onclick="showAddTaskModal()">
+                <i class="fa-solid fa-plus"></i>
+                <span class="">Add a card</span>
+            </div>
+        </section>
 
-            <!-- Completed -->
-            <section class="flex-1 bg-gray-800 rounded-lg p-4">
-                <h2 class="text-lg font-semibold mb-2">Completed</h2>
-                    <div id="completedTasks" class="">
+        <!-- Completed -->
+        <section class="flex-1 bg-gray-800 rounded-lg p-4">
+            <h2 id="" class="text-lg font-semibold mb-2">Completed</h2>
+            <div id="completedTasks" class="">
 
-                    </div>
-            </section>
+            </div>
+            <div class="flex relative items-center mt-2 ml-2 gap-2 cursor-pointer hover:text-gray-300" onclick="showAddTaskModal()">
+                <i class="fa-solid fa-plus"></i>
+                <span class="">Add a card</span>
+            </div>
+        </section>
 
-            <!-- Deployed & Tested -->
-            <section class="flex-1 bg-gray-800 rounded-lg p-4">
-                <h2 class="text-lg font-semibold mb-2">Deployed & Tested</h2>
-                    <div id="deployedTasks" class="">
+        <!-- Deployed & Tested -->
+        <section class="flex-1 bg-gray-800 rounded-lg p-4">
+            <h2 id="" class="text-lg font-semibold mb-2">Deployed & Tested</h2>
+            <div id="deployedTestedTasks" class="">
 
-                    </div>
-            </section>
+            </div>
+            <div class="flex relative items-center mt-2 ml-2 gap-2 cursor-pointer hover:text-gray-300" onclick="showAddTaskModal()">
+                <i class="fa-solid fa-plus"></i>
+                <span class="">Add a card</span>
+            </div>
+        </section>
 
-            <!-- Archived -->
-            <section class="flex-1 bg-gray-800 rounded-lg p-4">
-                <h2 class="text-lg font-semibold mb-2">Archived</h2>
-                    <div id="archivedTasks" class="">
+        <!-- Archived -->
+        <section class="flex-1 bg-gray-800 rounded-lg p-4">
+            <h2 id="" class="text-lg font-semibold mb-2">Archived</h2>
+            <div id="archivedTasks" class="">
 
-                    </div>
-            </section>
+            </div>
+            <div class="flex relative items-center mt-2 ml-2 gap-2 cursor-pointer hover:text-gray-300" onclick="showAddTaskModal()">
+                <i class="fa-solid fa-plus"></i>
+                <span class="">Add a card</span>
+            </div>
+        </section>
 
     </main>
 
-       <!-- Add Task Modal -->
+    <!-- Add Task Modal -->
     <section id="addTaskModal" class="hidden fixed inset-0 bg-black items-center justify-center z-50">
-        <form
-            action="#"
-            method="post"
-            class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md space-y-4"
-            onsubmit="event.preventDefault();"
-        >
+        <form action="#" class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md space-y-4"
+            onsubmit="getTaskDataOnSubmitForm()">
             <h2 class="text-xl font-semibold text-gray-800">Add New Task</h2>
 
             <!-- Task Description -->
             <div>
-            <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Task Description</label>
-            <textarea
-                id="description"
-                name="description"
-                rows="3"
-                class="w-full p-2 text-gray-900 rounded-md shadow-sm"
-                placeholder="Enter task details..."
-                required
-            ></textarea>
+                <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Task Description</label>
+                <textarea id="description" name="description" rows="3"
+                    class="w-full p-2 text-gray-900 rounded-md shadow-sm" placeholder="Enter task details..."
+                    required></textarea>
             </div>
 
             <!-- Priority -->
             <div>
-            <label for="priority" class="block text-sm font-medium text-gray-700 mb-1">Priority</label>
-            <select
-                id="priority"
-                name="priority"
-                class="w-full text-gray-900 rounded-md shadow-sm p-2 "
-                required
-            >
-                <option value="Normal" selected>Normal</option>
-                <option value="Medium">Medium</option>
-                <option value="Urgent">Urgent</option>
-                <option value="High">High Priority</option>
-            </select>
+                <label for="priority" class="block text-sm font-medium text-gray-700 mb-1">Priority</label>
+                <select id="priority" name="priority" class="w-full text-gray-900 rounded-md shadow-sm p-2 " required>
+                    <option value="Normal" selected>Normal</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Urgent">Urgent</option>
+                    <option value="High Priority">High Priority</option>
+                </select>
+            </div>
+
+            <!-- Task Status -->
+            <div class="mt-4">
+                <label for="status" class="block text-sm font-medium text-gray-700 mb-1">Task Status</label>
+                <select id="status" name="status" class="w-full text-gray-900 rounded-md shadow-sm p-2" required>
+                    <option value="Backlog" selected>Backlog</option>
+                    <option value="InProgress">In Progress</option>
+                    <option value="Completed">Completed</option>
+                    <option value="DeployedTested">Deployed & Tested</option>
+                    <option value="Archived">Archived</option>
+                </select>
             </div>
 
             <!-- Time Assignment -->
             <div>
-            <label for="dueDate" class="block text-sm font-medium text-gray-700 mb-1">Due Date & Time</label>
-            <input
-                type="datetime-local"
-                id="dueDate"
-                name="dueDate"
-                class="w-full text-gray-900 rounded-md shadow-sm p-2 text-sm"
-                required
-            />
+                <label for="dueDate" class="block text-sm font-medium text-gray-700 mb-1">Due Date & Time</label>
+                <input type="datetime-local" id="dueDate" name="dueDate"
+                    class="w-full text-gray-900 rounded-md shadow-sm p-2 text-sm" required />
             </div>
 
             <!-- Actions -->
-            <div class="sflex justify-end space-x-3 pt-4">
-            <button
-                type="button"
-                class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 cursor-pointer"
-                onclick="closeAddTaskModal()"
-            >
-                Cancel
-            </button>
-            <button
-                type="submit"
-                class="px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700 cursor-pointer"
-            >
-                Save Task
-            </button>
+            <div class="flex justify-end space-x-3 pt-4">
+                <button type="button"
+                    class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 cursor-pointer"
+                    onclick="closeAddTaskModal()">
+                    Cancel
+                </button>
+                <button id="taskFormBtn" type="submit"
+                    class="px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700 cursor-pointer">
+                     Save
+                </button>
             </div>
         </form>
     </section>

@@ -4,6 +4,8 @@ const taskFormBtn = document.getElementById("taskFormBtn")
 let   UpdateTaskId = null;
 const Tasks = [];
 
+// Pop-up window 
+
 const showAddTaskModal = () => {
     addTaskModal.style.display = "flex"
 }
@@ -11,6 +13,8 @@ const showAddTaskModal = () => {
 const closeAddTaskModal = () => {
     addTaskModal.style.display = "none"
 }
+
+// Local Storage
 
 const saveTaskDetailToLocalStorage = (data) => {
     try {
@@ -47,6 +51,7 @@ const updateTaskInLocalStorage = (updatedTask) => {
     }
 };
 
+// Task CURD Operations
 
 const generateUniqueTaskId = () => {
     return Date.now();
@@ -122,6 +127,7 @@ const displayAllTasks = () => {
             const taskCard = document.createElement("div");
             taskCard.className = "bg-black rounded-lg p-4 mb-4 text-white shadow cursor-pointer";
             taskCard.setAttribute("draggable", "true");
+            taskCard.addEventListener("dragstart", dragstartHandler);
 
             const date = new Date(task.date);
             const formattedDate = date.toLocaleDateString("en-GB", {
@@ -171,6 +177,25 @@ const updateTaskDetail = (id) => {
         throw error
     }
 }
+
+// Drag And Drop Task
+
+const dragstartHandler=(e)=> {
+    console.log("e in dragstartHandler :",e)
+    e.dataTransfer.setData("text", e.target.id);
+}
+const dragoverHandler=(e) =>{
+    e.preventDefault();
+}
+const dropEventHandler = (e)=>{
+    e.preventDefault();
+    const data = e.dataTransfer.getData("text")
+    e.target.appendChild(document.getElementById(data));
+}
+
+
+
+
 
 
 window.onload = () => {
