@@ -52,6 +52,18 @@ const updateTaskInLocalStorage = (updatedTask) => {
     }
 };
 
+const deleteTaskfromLocalStorage =(id)=>{
+    try{
+        const updatedTasks = Tasks.filter(task => task.id !== id);
+        localStorage.setItem("Tasks", JSON.stringify(updatedTasks));
+        window.location.reload();
+    }catch(error){
+        console.error("Error in deleting task");
+    }
+
+
+
+}
 // Task CURD Operations
 
 const generateUniqueTaskId = () => {
@@ -120,8 +132,6 @@ const displayAllTasks = () => {
         };
 
         Object.entries(statusSections).forEach(([status, section]) => {
-            console.log("[status]:",[status])
-            console.log("[section]:",[section])
             section.innerHTML = "";
             section.addEventListener("dragover", dragoverHandler);
             section.addEventListener("drop", (e) => dropEventHandler(e, status)); 
@@ -150,7 +160,10 @@ const displayAllTasks = () => {
             <p class="text-sm font-semibold my-2">Task ID: ${task.id} - ${task.description}</p>
             <div class="flex justify-between items-center">
                 <span class="flex items-center gap-1"><i class="fa-regular fa-clock"></i> ${formattedDate}</span>
-                <i class="fa-regular fa-pen-to-square cursor-pointer hover:text-blue-300" onclick="(function(){ updateTaskDetail(${task.id}); })()"></i>
+                <div>
+                    <i class="fa-regular fa-pen-to-square cursor-pointer hover:text-blue-300" onclick="updateTaskDetail(${task.id})"></i>
+                    <i class="fa-solid fa-trash cursor-pointer hover:text-blue-300 ml-2" onclick="deleteTaskfromLocalStorage(${task.id})"></i>
+                </div>
             </div>
         `;
 
