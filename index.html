@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Task Organiser</title>
     <link rel="stylesheet" href="./styles/output.css" />
-    <script src="https://kit.fontawesome.com/240b0bf0d2.js" crossorigin="anonymous"></script>
-
 </head>
 
 <body class="bg-yellow-900 text-white font-primary min-h-screen">
@@ -17,8 +15,9 @@
         <h1 class="text-xl font-bold">Task Organiser</h1>
 
         <div class="bg-gray-600 rounded-full px-3 flex items-center">
-           <input id="searchBar" type="text" class=" bg-none py-4 outline-none border-none" placeholder="Enter Task ID To Search...">
-           <span><i class="fa-solid fa-magnifying-glass text-2xl cursor-pointer" onclick="searchTask()"></i></span>
+            <input id="searchBar" type="text" class=" bg-none py-4 outline-none border-none"
+                placeholder="Enter Task ID To Search...">
+            <span><i class="fa-solid fa-magnifying-glass text-2xl cursor-pointer" onclick="searchTask()"></i></span>
         </div>
 
         <button class="text-lg bg-blue-600 px-4 py-2 rounded hover:bg-blue-500 cursor-pointer"
@@ -31,12 +30,13 @@
     <main class="flex items-start gap-4 max-w-[var(--standard-width)] mx-auto p-4">
 
         <!-- Backlog -->
-        <section class="flex-1 bg-gray-800 rounded-lg p-4" >
-                <h2 id="section-heading-backlogTasks" class="text-lg font-semibold mb-2" contenteditable="true">Backlog</h2>
+        <section class="flex-1 bg-gray-800 rounded-lg p-4">
+            <h2 id="section-heading-backlogTasks" class="text-lg font-semibold mb-2" contenteditable="true">Backlog</h2>
             <div id="backlogTasks" class="min-h-10">
 
             </div>
-            <div class="flex relative items-center mt-2 ml-2 gap-2 cursor-pointer hover:text-gray-300" onclick="showAddTaskModal()">
+            <div class="flex relative items-center mt-2 ml-2 gap-2 cursor-pointer hover:text-gray-300"
+                onclick="showAddTaskModal()">
                 <i class="fa-solid fa-plus"></i>
                 <span class="">Add a card</span>
             </div>
@@ -44,11 +44,13 @@
 
         <!-- In Progress -->
         <section class="flex-1 bg-gray-800 rounded-lg p-4">
-            <h2 id="section-heading-inProgress" class="text-lg font-semibold mb-2" contenteditable="true">In Progress</h2>
+            <h2 id="section-heading-inProgress" class="text-lg font-semibold mb-2" contenteditable="true">In Progress
+            </h2>
             <div id="inProgressTasks" class="min-h-10">
 
             </div>
-            <div class="flex relative items-center mt-2 ml-2 gap-2 cursor-pointer hover:text-gray-300" onclick="showAddTaskModal()">
+            <div class="flex relative items-center mt-2 ml-2 gap-2 cursor-pointer hover:text-gray-300"
+                onclick="showAddTaskModal()">
                 <i class="fa-solid fa-plus"></i>
                 <span class="">Add a card</span>
             </div>
@@ -56,11 +58,13 @@
 
         <!-- Completed -->
         <section class="flex-1 bg-gray-800 rounded-lg p-4">
-            <h2 id="section-heading-completedTasks" class="text-lg font-semibold mb-2" contenteditable="true">Completed</h2>
+            <h2 id="section-heading-completedTasks" class="text-lg font-semibold mb-2" contenteditable="true">Completed
+            </h2>
             <div id="completedTasks" class="min-h-10">
 
             </div>
-            <div class="flex relative items-center mt-2 ml-2 gap-2 cursor-pointer hover:text-gray-300" onclick="showAddTaskModal()">
+            <div class="flex relative items-center mt-2 ml-2 gap-2 cursor-pointer hover:text-gray-300"
+                onclick="showAddTaskModal()">
                 <i class="fa-solid fa-plus"></i>
                 <span class="">Add a card</span>
             </div>
@@ -68,11 +72,13 @@
 
         <!-- Deployed & Tested -->
         <section class="flex-1 bg-gray-800 rounded-lg p-4">
-            <h2 id="section-heading-deployedTestedTasks" class="text-lg font-semibold mb-2"contenteditable="true">Deployed & Tested</h2>
+            <h2 id="section-heading-deployedTestedTasks" class="text-lg font-semibold mb-2" contenteditable="true">
+                Deployed & Tested</h2>
             <div id="deployedTestedTasks" class="min-h-10">
 
             </div>
-            <div class="flex relative items-center mt-2 ml-2 gap-2 cursor-pointer hover:text-gray-300" onclick="showAddTaskModal()">
+            <div class="flex relative items-center mt-2 ml-2 gap-2 cursor-pointer hover:text-gray-300"
+                onclick="showAddTaskModal()">
                 <i class="fa-solid fa-plus"></i>
                 <span class="">Add a card</span>
             </div>
@@ -80,11 +86,13 @@
 
         <!-- Archived -->
         <section class="flex-1 bg-gray-800 rounded-lg p-4">
-            <h2 id="section-heading-archivedTasks" class="text-lg font-semibold mb-2"contenteditable="true">Archived</h2>
+            <h2 id="section-heading-archivedTasks" class="text-lg font-semibold mb-2" contenteditable="true">Archived
+            </h2>
             <div id="archivedTasks" class="min-h-10">
 
             </div>
-            <div class="flex relative items-center mt-2 ml-2 gap-2 cursor-pointer hover:text-gray-300" onclick="showAddTaskModal()">
+            <div class="flex relative items-center mt-2 ml-2 gap-2 cursor-pointer hover:text-gray-300"
+                onclick="showAddTaskModal()">
                 <i class="fa-solid fa-plus"></i>
                 <span class="">Add a card</span>
             </div>
@@ -145,14 +153,19 @@
                 </button>
                 <button id="taskFormBtn" type="submit"
                     class="px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700 cursor-pointer">
-                     Save
+                    Save
                 </button>
             </div>
         </form>
     </section>
 
 
-    <script src="./scripts/main.js"></script>
-</body>
+    <script type="module" src="./scripts/main.js"></script>
+    <script type="module" src="./scripts/taskHandler.js"></script>
+    <script type="module" src="./scripts/local-storage-handler.js"></script>
+
+    <script src="https://kit.fontawesome.com/240b0bf0d2.js" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </html>
