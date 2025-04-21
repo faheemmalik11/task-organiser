@@ -199,6 +199,29 @@ const updateTaskDetail = (id) => {
     }
 }
 
+// Search task with task id
+
+const searchTask = () => {
+    const searchBarValue = Number(document.getElementById("searchBar").value.trim());
+    const searchedTask = Tasks.find(task => task.id === searchBarValue)
+    if (searchedTask === undefined) {
+        alert("Task not found!");
+        return;
+    }
+    const searchTaskElement = document.getElementById(`task-${searchedTask.id}`);
+    if (!searchTaskElement) {
+        console.warn("Task DOM element not found.");
+        return;
+    }
+    const originalBackground = searchTaskElement.style.backgroundColor;
+    searchTaskElement.style.backgroundColor = "red";
+    searchTaskElement.scrollIntoView({  block: "center" });
+    setTimeout(() => {
+        searchTaskElement.style.backgroundColor = originalBackground || "black";
+    }, 3000);
+
+}
+
 // Drag And Drop Task
 
 const dragstartHandler=(e)=> {

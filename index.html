@@ -17,8 +17,8 @@
         <h1 class="text-xl font-bold">Task Organiser</h1>
 
         <div class="bg-gray-600 rounded-full px-3 flex items-center">
-           <input id="searchTask" type="text" class=" bg-none py-4 outline-none border-none" placeholder="Enter Task ID To Search...">
-           <span><i class="fa-solid fa-magnifying-glass text-2xl cursor-pointer"></i></span>
+           <input id="searchBar" type="text" class=" bg-none py-4 outline-none border-none" placeholder="Enter Task ID To Search...">
+           <span><i class="fa-solid fa-magnifying-glass text-2xl cursor-pointer" onclick="searchTask()"></i></span>
         </div>
 
         <button class="text-lg bg-blue-600 px-4 py-2 rounded hover:bg-blue-500 cursor-pointer"
@@ -33,7 +33,7 @@
         <!-- Backlog -->
         <section class="flex-1 bg-gray-800 rounded-lg p-4" >
             <h2 id="" class="text-lg font-semibold mb-2">Backlog</h2>
-            <div id="backlogTasks" class="" ondrop="dropEventHandler(event)" ondragover="dragoverHandler(event)">
+            <div id="backlogTasks" class="min-h-10">
 
             </div>
             <div class="flex relative items-center mt-2 ml-2 gap-2 cursor-pointer hover:text-gray-300" onclick="showAddTaskModal()">
@@ -45,7 +45,7 @@
         <!-- In Progress -->
         <section class="flex-1 bg-gray-800 rounded-lg p-4">
             <h2 id="" class="text-lg font-semibold mb-2">In Progress</h2>
-            <div id="inProgressTasks" class="">
+            <div id="inProgressTasks" class="min-h-10">
 
             </div>
             <div class="flex relative items-center mt-2 ml-2 gap-2 cursor-pointer hover:text-gray-300" onclick="showAddTaskModal()">
@@ -57,7 +57,7 @@
         <!-- Completed -->
         <section class="flex-1 bg-gray-800 rounded-lg p-4">
             <h2 id="" class="text-lg font-semibold mb-2">Completed</h2>
-            <div id="completedTasks" class="">
+            <div id="completedTasks" class="min-h-10">
 
             </div>
             <div class="flex relative items-center mt-2 ml-2 gap-2 cursor-pointer hover:text-gray-300" onclick="showAddTaskModal()">
@@ -69,7 +69,7 @@
         <!-- Deployed & Tested -->
         <section class="flex-1 bg-gray-800 rounded-lg p-4">
             <h2 id="" class="text-lg font-semibold mb-2">Deployed & Tested</h2>
-            <div id="deployedTestedTasks" class="">
+            <div id="deployedTestedTasks" class="min-h-10">
 
             </div>
             <div class="flex relative items-center mt-2 ml-2 gap-2 cursor-pointer hover:text-gray-300" onclick="showAddTaskModal()">
@@ -81,7 +81,7 @@
         <!-- Archived -->
         <section class="flex-1 bg-gray-800 rounded-lg p-4">
             <h2 id="" class="text-lg font-semibold mb-2">Archived</h2>
-            <div id="archivedTasks" class="">
+            <div id="archivedTasks" class="min-h-10">
 
             </div>
             <div class="flex relative items-center mt-2 ml-2 gap-2 cursor-pointer hover:text-gray-300" onclick="showAddTaskModal()">
