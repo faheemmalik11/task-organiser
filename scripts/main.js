@@ -1,8 +1,32 @@
 
 const addTaskModal = document.getElementById("addTaskModal")
 const taskFormBtn = document.getElementById("taskFormBtn")
+const sectionHeadings = document.querySelectorAll('[contenteditable="true"]');
 let   UpdateTaskId = null;
 const Tasks = [];
+
+
+// Dynamic Section Headings
+
+sectionHeadings.forEach((heading) => {
+    heading.addEventListener("input", (e) => {
+        const sectionId = e.target.id;
+        const updatedHeading = e.target.innerText.trim();
+        localStorage.setItem(sectionId, updatedHeading);
+    });
+});
+
+const loadSavedHeadings = () => {
+    sectionHeadings.forEach((heading) => {
+        const sectionId = heading.id;
+        const savedHeading = localStorage.getItem(sectionId) ;
+        if (savedHeading) {
+            heading.innerText = savedHeading;
+        }
+    });
+};
+
+
 
 // Pop-up window 
 
@@ -256,5 +280,7 @@ window.onload = () => {
     // fetch saved tasked in local storage on page load
     getTasksFromLocalStorage();
     displayAllTasks();
+    loadSavedHeadings();
+
 
 }
