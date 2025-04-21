@@ -39,7 +39,8 @@ const updateTaskInLocalStorage = (updatedTask) => {
         let parsedData = JSON.parse(localStorage.getItem("Tasks")) || [];
 
         const taskToBeUpdated = parsedData.findIndex(task => task.id === updatedTask.id);
-
+        console.log("taskToBeUpdated in local storage:",taskToBeUpdated)
+        console.log("parsedData in local storage:",parsedData)
         if (taskToBeUpdated !== -1) {
             parsedData[taskToBeUpdated] = updatedTask;
             localStorage.setItem("Tasks", JSON.stringify(parsedData));
@@ -118,13 +119,20 @@ const displayAllTasks = () => {
             Archived: document.getElementById("archivedTasks")
         };
 
-        Object.values(statusSections).forEach(section => section.innerHTML = "");
+        Object.entries(statusSections).forEach(([status, section]) => {
+            console.log("[status]:",[status])
+            console.log("[section]:",[section])
+            section.innerHTML = "";
+            section.addEventListener("dragover", dragoverHandler);
+            section.addEventListener("drop", (e) => dropEventHandler(e, status)); 
+        });
 
         Tasks.forEach((task) => {
             const section = statusSections[task.status];
             if (!section) return;
 
             const taskCard = document.createElement("div");
+            taskCard.id = `task-${task.id}`;
             taskCard.className = "bg-black rounded-lg p-4 mb-4 text-white shadow cursor-pointer";
             taskCard.setAttribute("draggable", "true");
             taskCard.addEventListener("dragstart", dragstartHandler);
@@ -149,7 +157,7 @@ const displayAllTasks = () => {
             section.appendChild(taskCard);
         });
     } catch (error) {
-        throw error;
+        console.error("Error in displaying tasks:", error);
     }
 };
 
@@ -174,7 +182,7 @@ const updateTaskDetail = (id) => {
         showAddTaskModal();
 
     } catch (error) {
-        throw error
+        console.error("Error in Update tasks:", error);
     }
 }
 
@@ -186,15 +194,25 @@ const dragstartHandler=(e)=> {
 }
 const dragoverHandler=(e) =>{
     e.preventDefault();
+    console.log("e in dragoverHandler :",e)
+
 }
-const dropEventHandler = (e)=>{
+const dropEventHandler = (e ,newStatus)=>{
     e.preventDefault();
-    const data = e.dataTransfer.getData("text")
-    e.target.appendChild(document.getElementById(data));
+    const data = e.dataTransfer.getData("text/plain")
+    console.log("e in dropEventHandler :",e)
+    console.log("data    in dropEventHandler:",data)
+    const draggedElem = document.getElementById(data);
+    if (!draggedElem) return;
+    e.currentTarget.appendChild(draggedElem);
+    const taskId = parseInt(data.replace("task-", ""));
+    const taskToUpdate = Tasks.find(t => t.id === taskId);
+    if (taskToUpdate) {
+        console.log("newStatus:",newStatus)
+        taskToUpdate.status = newStatus;
+    }
+    updateTaskInLocalStorage(taskToUpdate)
 }
-
-
-
 
 
 
